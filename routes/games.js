@@ -1,6 +1,6 @@
 import express from "express";
 import axios from "axios";
-
+import db from "../db/pool.js";
 
 const router = express.Router();
 
@@ -18,15 +18,24 @@ router.get("/search", async (req, res) => {
     }
 });
 
-router.post("/add", (req, res) => {
-
+router.post("/add", async (req, res) => {
+    try {
+        const { rawg_id, nome, capa, status, avaliacao, notas } = req.body;
+        await db.query(
+            "INSERT INTO games (rawg_id, nome, capa_url, status, avaliacao, notas_pessoais) VALUES ($1, $2, $3, $4, $5, $6)",
+            [rawg_id, nome, capa, status, avaliacao, notas]
+        );
+        res.redirect("/");
+    } catch(err) {
+        console.log(err);
+    }
 });
 
 router.get("/edit/:id", (req, res) => {
 
 });
 
-router.post("/edit/:d", (req, res) => {
+router.post("/edit/:id", (req, res) => {
 
 });
 
