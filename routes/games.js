@@ -4,8 +4,13 @@ import db from "../db/pool.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-    res.render("index.ejs");
+router.get("/", async (req, res) => {
+    try {
+        const result = await db.query("SELECT * FROM games");
+        res.render("index.ejs", { games: result.rows });
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 router.get("/search", async (req, res) => {
@@ -26,21 +31,39 @@ router.post("/add", async (req, res) => {
             [rawg_id, nome, capa, status, avaliacao, notas]
         );
         res.redirect("/");
-    } catch(err) {
+    } catch (err) {
         console.log(err);
     }
 });
 
 router.get("/edit/:id", (req, res) => {
-
+    try {
+        const result = await db.query("SELECT * FROM games WHERE id = $1", [req.params.id]);
+        res.render("edit.ejs", { game: result.rows[0] });
+    } catch (err) {
+        console.log(err)
+    }
 });
 
-router.post("/edit/:id", (req, res) => {
-
+router.post("/edit/:id", async (req, res) => {
+    try {
+        const { rawg_id, nome, capa, status, avaliacao, notas } = req.body;
+        const id = req.params.id;
+        await db.query("UPDATE games SET rawg_id=$1, nome=$2, capa_url=$3, status=$4, avaliacao=$5, notas_pessoais=$6 WHERE id=$7", [rawg_id, nome, capa, status, avaliacao, notas, id]);
+        res.redirect("/")
+    } catch (err) {
+        console.log(err)
+    }
 });
 
-router.delete("/delete/:id", (req, res) => {
-
+router.delete("/delete/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        await db.query("DELETE FROM games WHERE id = $1", [id]);
+        res.redirect("/")
+    } catch (err) {
+        console.log(err)
+    }
 });
 
 export default router;
