@@ -1,0 +1,109 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    background: #0f0f0f;
+    color: #f0f0f0;
+    padding: 2rem;
+}
+
+header {
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2rem;
+}
+
+/* --- Busca --- */
+#search-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+#search-input {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+/* --- Grid de jogos salvos --- */
+#games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.game-card {
+    background: #1c1c1c;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.game-card img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.game-info,
+.game-actions {
+    padding: 0.75rem;
+}
+
+/* --- Resultados de busca --- */
+#search-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.search-card {
+    display: flex;
+    gap: 0.75rem;
+    background: #1c1c1c;
+    padding: 0.75rem;
+    border-radius: 8px;
+    width: 320px;
+}
+
+.search-card img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* --- Formulário de edição --- */
+form label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+form textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+button {
+    margin-top: 1rem;
+    padding: 0.5rem 1.25rem;
+    cursor: pointer;
+}

@@ -9,3 +9,5 @@ const db = new pg.Pool({
 });
 
 db.connect();
+
+export default db;

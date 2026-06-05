@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Backlog</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>🎮 Game Backlog</h1>
+    </header>
+
+    <main>
+
+        <!-- ========== SEÇÃO DE BUSCA ========== -->
+        <section id="search-section">
+            <h2>Buscar Jogo</h2>
+
+            <!-- Input de busca — chama /search?q=... via JS -->
+            <div id="search-bar">
+                <input type="text" id="search-input" placeholder="Digite o nome do jogo..." />
+                <button id="search-btn">Buscar</button>
+            </div>
+
+            <!-- Resultados da busca (preenchidos via fetch no search.js) -->
+            <div id="search-results">
+            </div>
+        </section>
+
+        <!-- ========== SEÇÃO DA BIBLIOTECA ========== -->
+        <section id="library-section">
+            <h2>Minha Biblioteca</h2>
+
+            <!-- TODO: adicionar select para ordenar (por nome, avaliação, status...) -->
+
+            <div id="games-grid">
+                <!-- Loop EJS nos jogos vindos do banco -->
+                <% games.forEach(game => { %>
+                    <div class="game-card">
+
+                        <!-- Capa do jogo vinda da RAWG -->
+                        <img src="<%= game.capa_url %>" alt="<%= game.nome %>" />
+
+                        <div class="game-info">
+                            <h3><%= game.nome %></h3>
+                            <p>Status: <%= game.status %></p>
+                            <p>Avaliação: <%= game.avaliacao %>/5</p>
+                            <p>Notas: <%= game.notas_pessoais %></p>
+                        </div>
+
+                        <div class="game-actions">
+                            <!-- Editar: vai para GET /edit/:id -->
+                            <a href="/edit/<%= game.id %>">Editar</a>
+
+                            <!-- Deletar: POST /delete/:id (forms não suportam DELETE) -->
+                            <form action="/delete/<%= game.id %>" method="POST">
+                                <button type="submit">Remover</button>
+                            </form>
+                        </div>
+
+                    </div>
+                <% }) %>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="/js/search.js"></script>
+</body>
+</html>

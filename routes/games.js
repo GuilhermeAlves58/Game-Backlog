@@ -36,7 +36,7 @@ router.post("/add", async (req, res) => {
     }
 });
 
-router.get("/edit/:id", (req, res) => {
+router.get("/edit/:id", async (req, res) => {
     try {
         const result = await db.query("SELECT * FROM games WHERE id = $1", [req.params.id]);
         res.render("edit.ejs", { game: result.rows[0] });
