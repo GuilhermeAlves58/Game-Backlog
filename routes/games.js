@@ -25,7 +25,8 @@ router.get("/search", async (req, res) => {
 
 router.post("/add", async (req, res) => {
     try {
-        const { rawg_id, nome, capa, status, avaliacao, notas } = req.body;
+        const { rawg_id, nome, capa, status, notas } = req.body;
+        const avaliacao = parseInt(req.body.avaliacao) || 0;
         await db.query(
             "INSERT INTO games (rawg_id, nome, capa_url, status, avaliacao, notas_pessoais) VALUES ($1, $2, $3, $4, $5, $6)",
             [rawg_id, nome, capa, status, avaliacao, notas]
@@ -56,7 +57,7 @@ router.post("/edit/:id", async (req, res) => {
     }
 });
 
-router.delete("/delete/:id", async (req, res) => {
+router.post("/delete/:id", async (req, res) => {
     try {
         const id = req.params.id;
         await db.query("DELETE FROM games WHERE id = $1", [id]);

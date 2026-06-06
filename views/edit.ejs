@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Jogo</title>
-    <link rel="stylesheet" href="/public/style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
 
     <header>
@@ -18,24 +20,22 @@
         <form action="/edit/<%= game.id %>" method="POST">
 
             <!-- Campos somente leitura (vêm da API, não devem mudar) -->
-            <input type="hidden" name="rawg_id"  value="<%= game.rawg_id %>" />
-            <input type="hidden" name="nome"     value="<%= game.nome %>" />
-            <input type="hidden" name="capa"     value="<%= game.capa_url %>" />
+            <input type="hidden" name="rawg_id" value="<%= game.rawg_id %>" />
+            <input type="hidden" name="nome" value="<%= game.nome %>" />
+            <input type="hidden" name="capa" value="<%= game.capa_url %>" />
 
             <!-- Campos editáveis pelo usuário -->
 
             <label for="status">Status</label>
             <select name="status" id="status">
-                <!-- TODO: adicionar option "selected" no valor atual -->
-                <option value="quero jogar">Quero jogar</option>
-                <option value="jogando">Jogando</option>
-                <option value="zerado">Zerado</option>
-                <option value="abandonado">Abandonado</option>
+                <option value="quero jogar" <%=game.status==="quero jogar" ? "selected" : "" %>>Quero jogar</option>
+                <option value="jogando" <%=game.status==="jogando" ? "selected" : "" %>>Jogando</option>
+                <option value="zerado" <%=game.status==="zerado" ? "selected" : "" %>>Zerado</option>
+                <option value="abandonado" <%=game.status==="abandonado" ? "selected" : "" %>>Abandonado</option>
             </select>
 
             <label for="avaliacao">Avaliação (1-5)</label>
-            <input type="number" name="avaliacao" id="avaliacao"
-                   min="1" max="5" value="<%= game.avaliacao %>" />
+            <input type="number" name="avaliacao" id="avaliacao" min="1" max="5" value="<%= game.avaliacao %>" />
 
             <label for="notas">Notas Pessoais</label>
             <textarea name="notas" id="notas"><%= game.notas_pessoais %></textarea>
@@ -45,4 +45,5 @@
     </main>
 
 </body>
+
 </html>
