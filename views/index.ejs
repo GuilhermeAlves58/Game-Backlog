@@ -32,8 +32,14 @@
         <!-- ========== SEÇÃO DA BIBLIOTECA ========== -->
         <section id="library-section">
             <h2>Minha Biblioteca</h2>
-
-            <!-- TODO: adicionar select para ordenar (por nome, avaliação, status...) -->
+            <form method="GET">
+                <label for="ordenacao">Tipo de ordenação</label>
+                <select name="ordenacao" onchange="this.form.submit()">
+                    <option value="nome"      <%= (query === 'nome'      || !query) ? 'selected' : '' %>>Nome</option>
+                    <option value="status"    <%= query === 'status'    ? 'selected' : '' %>>Status</option>
+                    <option value="avaliacao" <%= query === 'avaliacao' ? 'selected' : '' %>>Avaliação</option>
+                </select>
+            </form>
 
             <div id="games-grid">
                 <!-- Loop EJS nos jogos vindos do banco -->

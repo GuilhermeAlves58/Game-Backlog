@@ -59,13 +59,6 @@ header h1 {
 
 /* --- Resultados de busca --- */
 #search-results {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-#search-results {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 1rem;
