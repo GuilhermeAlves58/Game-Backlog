@@ -163,7 +163,7 @@ Campos utilizados: `id`, `name`, `background_image`
 
 ## 🌐 Deploy
 
-Acesse a aplicação em produção: [https://game-backlog-zy2v.onrender.com](#)
+Acesse a aplicação em produção:[https://game-backlog-zy2v.onrender.com/]
 
 ---
 
